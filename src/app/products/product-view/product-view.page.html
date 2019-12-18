@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons [slot]="'secondary'">
+      <ion-back-button [defaultHref]="['/products']"></ion-back-button>
+    </ion-buttons>
+    <ion-title>View Product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2>{{product?.name}}</h2>
+  <h3>
+    <ion-text [color]="'success'">{{product?.priceString}}</ion-text>
+  </h3>
+  <ion-list>
+    <ion-item>
+      <ion-label [position]="'stacked'">Category</ion-label>
+      <ion-note>{{product?.category}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label [position]="'stacked'">Description</ion-label>
+      <ion-note>{{product?.description}}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
