@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IAppPage } from './_shared/classes/app-page';
 import { Router, NavigationEnd } from '@angular/router';
+import { ShoppingCartService } from './shopping-cart/services/shopping-cart.service';
+import { ShoppingCart } from './shopping-cart/classes/shopping-cart';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +31,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router
+    private router: Router,
+    private cartService: ShoppingCartService
   ) {
     this.router.events.subscribe(
       (e) => {
@@ -41,9 +44,19 @@ export class AppComponent {
           }
         }
       }
-    )
+    );
+
+    this.cartService.onChanges.subscribe(
+      (event) => {
+        console.log(event);
+        this.cart = this.cartService.cart;
+      }
+    );
+
     this.initializeApp();
   }
+
+  cart = new ShoppingCart();
 
   handleNavigation(page: IAppPage) {
     if (page.href_current) {

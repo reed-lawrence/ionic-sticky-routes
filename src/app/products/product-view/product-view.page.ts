@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/_shared/services/product.service';
 import { Product } from 'src/app/_shared/classes/product';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ShoppingCartService } from 'src/app/shopping-cart/services/shopping-cart.service';
 
 @Component({
   selector: 'app-product-view',
@@ -13,7 +14,8 @@ export class ProductViewPage implements OnInit, OnDestroy {
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cartService: ShoppingCartService
   ) {
     this.subs.push(this.productService.onChanges.subscribe(
       (e) => {
@@ -30,6 +32,13 @@ export class ProductViewPage implements OnInit, OnDestroy {
   async GetProduct(productId: number) {
     this.productService.get(productId).then(prod => {
       this.product = prod;
+    });
+  }
+
+  async AddToCart(product: Product) {
+    return new Promise<void>((resolve, reject) => {
+      this.cartService.cart.products.push(product);
+      resolve();
     });
   }
 

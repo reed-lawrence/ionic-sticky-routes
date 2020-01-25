@@ -9,6 +9,10 @@ export class ProductService {
 
   constructor() { }
 
+  /**
+   * Simulates a backend API
+   */
+  // tslint:disable-next-line:variable-name
   private _products: IProduct[] = [
     {
       id: 1,
@@ -51,7 +55,7 @@ export class ProductService {
 
   public async create(p: Product): Promise<number | undefined> {
     for (let i = 1; i <= this._products.length; i++) {
-      if (this._products.findIndex(p => p.id === i) === -1) {
+      if (this._products.findIndex(prod => prod.id === i) === -1) {
         const newProduct = new Product(p);
         newProduct.id = i;
         this._products.push(newProduct);

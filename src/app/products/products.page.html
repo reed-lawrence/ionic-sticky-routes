@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Products</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="updateShoppingCart()">
+        {{cartService.cart.products.length}}
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

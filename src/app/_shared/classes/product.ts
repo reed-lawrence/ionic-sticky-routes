@@ -49,4 +49,9 @@ export class Product implements IProduct {
 
     return output;
   }
+
+  calculateDiscount(discountAmt: number) {
+    return this.price * discountAmt;
+  }
+
 }
